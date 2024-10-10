@@ -1,15 +1,14 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { Button, ChakraProvider } from '@chakra-ui/react'
+import thema from './thema/thema'
 
 export default function App() {
 
   return (
     <>
-      <ChakraProvider>
+      <ChakraProvider theme={thema}>
         <Button colorScheme="teal">ボタン</Button>
+        <p>テスト</p>
       </ChakraProvider>
     </>
   )
