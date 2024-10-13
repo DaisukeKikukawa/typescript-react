@@ -3,14 +3,22 @@ import { memo, FC, useEffect } from "react";
 import UserCard from "../organisms/layout/user/UserCard";
 import { useAllUsers } from "../../hooks/useAllUsers";
 import { UserDetailModal } from "../organisms/layout/user/UserDetailModal";
+import { useSelectUser } from "../../hooks/useSelectUser";
+import { useLoginUser } from "../../hooks/useLoginUser";
 
 export const UserManagement: FC = memo(() => {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const {getUsers, users,loading} = useAllUsers();
+  const {onSelectUser, selectedUser} = useSelectUser();
+  const {loginUser} = useLoginUser();
+  console.log(loginUser);
 
   useEffect(() => getUsers(), []);
 
-  const onClickUser = () => onOpen();
+  const onClickUser = (id: number) => {
+    onSelectUser({id, users, onOpen});
+    onOpen()
+  };
 
   return (
     <>
@@ -23,6 +31,7 @@ export const UserManagement: FC = memo(() => {
           {users.map((user) => (
             <WrapItem key={user.id} mx="auto">
               <UserCard
+                id={user.id}
                 imageUrl="https://picsum.photos/800"
                 userName={user.username}
                 fullName={user.name}
@@ -32,7 +41,7 @@ export const UserManagement: FC = memo(() => {
           ))}
         </Wrap>
       )}
-    <UserDetailModal isOpen={isOpen} onClose={onClose} />
+    <UserDetailModal user={selectedUser} isOpen={isOpen} onClose={onClose}  />
     </>
   );
 });
