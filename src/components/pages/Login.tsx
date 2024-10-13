@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/useAuth';
 
 export const Login: FC = memo(() => {
   const {login, loading} = useAuth();
-  
+
   const [userId, setUserId] = useState("");
 
   const onChangeUserId = (e: ChangeEvent<HTMLInputElement>) => setUserId(e.target.value);
@@ -21,7 +21,7 @@ export const Login: FC = memo(() => {
           <Divider my={4} />
           <Stack spacing={6} py={4} px={10}>
             <Input placeholder="ユーザーID" value={userId} onChange={onChangeUserId} />
-            <PrimaryButton onClick={onClickLogin} disabled={userId === "" || loading} loading={loading}>ログイン</PrimaryButton>
+            <PrimaryButton onClick={onClickLogin} disabled={userId === ""} loading={loading}>ログイン</PrimaryButton>
           </Stack>
         </Box>
       </Flex>
